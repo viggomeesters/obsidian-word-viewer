@@ -1,7 +1,7 @@
 {
-  "id": "docx-viewer",
-  "name": "DOCX Viewer",
-  "version": "0.1.0",
+  "id": "word-viewer",
+  "name": "Word Viewer",
+  "version": "0.1.1",
   "minAppVersion": "1.5.0",
   "description": "Open .docx documents as read-only text, structure, media, and package diagnostics.",
   "author": "Viggo Meesters",

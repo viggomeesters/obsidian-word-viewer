@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
-  <title id="title">DOCX Viewer screenshot mock</title>
-  <desc id="desc">A screenshot-style mock of the DOCX Viewer interface.</desc>
+  <title id="title">Word Viewer screenshot mock</title>
+  <desc id="desc">A screenshot-style mock of the Word Viewer interface.</desc>
   <rect width="1400" height="900" fill="#20242b"/>
   <rect x="44" y="40" width="1312" height="820" rx="18" fill="#111318"/>
   <rect x="76" y="84" width="1248" height="88" rx="10" fill="#1e232b"/>
@@ -16,7 +16,7 @@
   <rect x="106" y="360" width="250" height="72" rx="10" fill="#303743"/>
   <text x="132" y="394" fill="#ffffff" font-family="Arial" font-size="17" font-weight="700">2 Table 1</text>
   <text x="132" y="418" fill="#cbd5e1" font-family="Arial" font-size="13">2 rows, 2 columns</text>
-  <text x="460" y="260" fill="#111827" font-family="Arial" font-size="30" font-weight="800">DOCX Viewer Fixture</text>
+  <text x="460" y="260" fill="#111827" font-family="Arial" font-size="30" font-weight="800">Word Viewer Fixture</text>
   <text x="460" y="296" fill="#667085" font-family="Arial" font-size="16">Codex · Fixture Generator</text>
   <rect x="460" y="332" width="796" height="88" rx="12" fill="#ffffff" stroke="#d8dee8"/>
   <text x="490" y="368" fill="#111827" font-family="Arial" font-size="18" font-weight="800">Executive summary</text>

@@ -20,7 +20,7 @@ import {
   parseDocx,
 } from "./parser";
 
-const VIEW_TYPE_DOCX_VIEWER = "docx-viewer";
+const VIEW_TYPE_DOCX_VIEWER = "word-viewer";
 const DOCX_EXTENSIONS = ["docx"];
 const MEDIA_RENDER_LIMIT = 120;
 const PACKAGE_RENDER_LIMIT = 240;
@@ -108,9 +108,9 @@ class DocxViewerView extends FileView {
   private render(): void {
     const container = this.contentEl;
     container.empty();
-    container.addClass("docx-viewer");
+    container.addClass("word-viewer");
 
-    const header = container.createDiv({ cls: "docx-viewer__header" });
+    const header = container.createDiv({ cls: "word-viewer__header" });
     this.renderTitle(header);
     this.renderToolbar(header);
 
@@ -134,27 +134,27 @@ class DocxViewerView extends FileView {
     renderSummary(container, this.document);
     renderWarnings(container, this.document.warnings, "Document warnings");
 
-    const body = container.createDiv({ cls: "docx-viewer__body" });
+    const body = container.createDiv({ cls: "word-viewer__body" });
     this.renderOutline(body, this.document);
     this.renderDetail(body, this.document);
   }
 
   private renderTitle(parent: HTMLElement): void {
-    const title = parent.createDiv({ cls: "docx-viewer__title" });
+    const title = parent.createDiv({ cls: "word-viewer__title" });
     title.createDiv({
-      cls: "docx-viewer__filename",
+      cls: "word-viewer__filename",
       text: this.file?.name ?? "DOCX file",
     });
     title.createDiv({
-      cls: "docx-viewer__path",
+      cls: "word-viewer__path",
       text: this.file?.path ?? "",
     });
   }
 
   private renderToolbar(parent: HTMLElement): void {
-    const toolbar = parent.createDiv({ cls: "docx-viewer__toolbar" });
-    const searchWrap = toolbar.createDiv({ cls: "docx-viewer__search" });
-    setIcon(searchWrap.createSpan({ cls: "docx-viewer__search-icon" }), "search");
+    const toolbar = parent.createDiv({ cls: "word-viewer__toolbar" });
+    const searchWrap = toolbar.createDiv({ cls: "word-viewer__search" });
+    setIcon(searchWrap.createSpan({ cls: "word-viewer__search-icon" }), "search");
     const searchInput = searchWrap.createEl("input", {
       attr: {
         "aria-label": "Filter document content",
@@ -176,30 +176,30 @@ class DocxViewerView extends FileView {
   }
 
   private renderOutline(parent: HTMLElement, document: ParsedDocx): void {
-    const sidebar = parent.createDiv({ cls: "docx-viewer__sidebar" });
-    sidebar.createDiv({ cls: "docx-viewer__section-title", text: "Outline" });
+    const sidebar = parent.createDiv({ cls: "word-viewer__sidebar" });
+    sidebar.createDiv({ cls: "word-viewer__section-title", text: "Outline" });
 
     const filteredBlocks = filterBlocks(document.renderedBlocks, this.filterValue);
     const outlineBlocks = filteredBlocks.filter((block) => block.headingLevel !== null || block.type === "table");
     const blocks = outlineBlocks.length > 0 ? outlineBlocks : filteredBlocks.slice(0, 80);
     if (blocks.length === 0) {
-      sidebar.createDiv({ cls: "docx-viewer__empty", text: "No document blocks match the filter." });
+      sidebar.createDiv({ cls: "word-viewer__empty", text: "No document blocks match the filter." });
       return;
     }
 
     blocks.forEach((block) => {
       const button = sidebar.createEl("button", {
-        cls: "docx-viewer__outline-button",
+        cls: "word-viewer__outline-button",
         attr: { type: "button" },
       });
       button.toggleClass("is-active", block.index === this.activeBlockIndex);
       button.toggleClass("is-heading", block.headingLevel !== null);
       button.toggleClass(`is-level-${block.headingLevel ?? 0}`, block.headingLevel !== null);
-      button.createSpan({ cls: "docx-viewer__outline-index", text: String(block.index) });
-      const label = button.createSpan({ cls: "docx-viewer__outline-label" });
-      label.createSpan({ cls: "docx-viewer__outline-title", text: block.label || block.text || block.type });
+      button.createSpan({ cls: "word-viewer__outline-index", text: String(block.index) });
+      const label = button.createSpan({ cls: "word-viewer__outline-label" });
+      label.createSpan({ cls: "word-viewer__outline-title", text: block.label || block.text || block.type });
       label.createSpan({
-        cls: "docx-viewer__outline-meta",
+        cls: "word-viewer__outline-meta",
         text: block.type === "table" ? `${block.rowCount} rows, ${block.columnCount} columns` : block.style || "paragraph",
       });
       button.addEventListener("click", () => {
@@ -210,7 +210,7 @@ class DocxViewerView extends FileView {
   }
 
   private renderDetail(parent: HTMLElement, document: ParsedDocx): void {
-    const detail = parent.createDiv({ cls: "docx-viewer__detail" });
+    const detail = parent.createDiv({ cls: "word-viewer__detail" });
     renderMetadata(detail, document);
 
     const filteredBlocks = filterBlocks(document.renderedBlocks, this.filterValue);
@@ -231,45 +231,45 @@ class DocxViewerView extends FileView {
 }
 
 function renderSummary(parent: HTMLElement, document: ParsedDocx): void {
-  const summary = parent.createDiv({ cls: "docx-viewer__summary" });
-  summary.createSpan({ cls: "docx-viewer__pill", text: `${document.summary.blockCount} blocks` });
-  summary.createSpan({ cls: "docx-viewer__pill", text: `${document.summary.headingCount} headings` });
-  summary.createSpan({ cls: "docx-viewer__pill", text: `${document.summary.tableCount} tables` });
-  summary.createSpan({ cls: "docx-viewer__pill", text: `${document.summary.commentCount} comments` });
-  summary.createSpan({ cls: "docx-viewer__pill", text: `${document.summary.noteCount} notes` });
-  summary.createSpan({ cls: "docx-viewer__pill", text: `${document.summary.mediaCount} media` });
-  summary.createSpan({ cls: "docx-viewer__pill", text: `${document.summary.packageEntryCount} package entries` });
+  const summary = parent.createDiv({ cls: "word-viewer__summary" });
+  summary.createSpan({ cls: "word-viewer__pill", text: `${document.summary.blockCount} blocks` });
+  summary.createSpan({ cls: "word-viewer__pill", text: `${document.summary.headingCount} headings` });
+  summary.createSpan({ cls: "word-viewer__pill", text: `${document.summary.tableCount} tables` });
+  summary.createSpan({ cls: "word-viewer__pill", text: `${document.summary.commentCount} comments` });
+  summary.createSpan({ cls: "word-viewer__pill", text: `${document.summary.noteCount} notes` });
+  summary.createSpan({ cls: "word-viewer__pill", text: `${document.summary.mediaCount} media` });
+  summary.createSpan({ cls: "word-viewer__pill", text: `${document.summary.packageEntryCount} package entries` });
   if (document.summary.externalRelationshipCount > 0) {
-    summary.createSpan({ cls: "docx-viewer__note", text: `${document.summary.externalRelationshipCount} external relationships listed` });
+    summary.createSpan({ cls: "word-viewer__note", text: `${document.summary.externalRelationshipCount} external relationships listed` });
   }
   if (document.summary.trackedChangeCount > 0) {
-    summary.createSpan({ cls: "docx-viewer__note", text: `${document.summary.trackedChangeCount} tracked change markers` });
+    summary.createSpan({ cls: "word-viewer__note", text: `${document.summary.trackedChangeCount} tracked change markers` });
   }
   if (document.summary.renderedBlockCount < document.summary.blockCount) {
-    summary.createSpan({ cls: "docx-viewer__note", text: `${document.summary.renderedBlockCount} blocks rendered` });
+    summary.createSpan({ cls: "word-viewer__note", text: `${document.summary.renderedBlockCount} blocks rendered` });
   }
 }
 
 function renderMetadata(parent: HTMLElement, document: ParsedDocx): void {
-  const section = parent.createDiv({ cls: "docx-viewer__card" });
-  const heading = section.createDiv({ cls: "docx-viewer__detail-heading" });
-  heading.createDiv({ cls: "docx-viewer__detail-title", text: document.title || "Untitled document" });
-  heading.createDiv({ cls: "docx-viewer__detail-path", text: [document.creator, document.application].filter(Boolean).join(" · ") || "Metadata unavailable" });
+  const section = parent.createDiv({ cls: "word-viewer__card" });
+  const heading = section.createDiv({ cls: "word-viewer__detail-heading" });
+  heading.createDiv({ cls: "word-viewer__detail-title", text: document.title || "Untitled document" });
+  heading.createDiv({ cls: "word-viewer__detail-path", text: [document.creator, document.application].filter(Boolean).join(" · ") || "Metadata unavailable" });
 }
 
 function renderBlocks(parent: HTMLElement, blocks: DocxBlock[], activeBlockIndex: number): void {
-  const section = parent.createDiv({ cls: "docx-viewer__card" });
-  section.createDiv({ cls: "docx-viewer__section-title", text: "Document content" });
+  const section = parent.createDiv({ cls: "word-viewer__card" });
+  section.createDiv({ cls: "word-viewer__section-title", text: "Document content" });
   if (blocks.length === 0) {
-    section.createDiv({ cls: "docx-viewer__empty", text: "No document content matches the filter." });
+    section.createDiv({ cls: "word-viewer__empty", text: "No document content matches the filter." });
     return;
   }
 
   blocks.forEach((block) => {
-    const item = section.createDiv({ cls: "docx-viewer__block" });
+    const item = section.createDiv({ cls: "word-viewer__block" });
     item.toggleClass("is-active", block.index === activeBlockIndex);
     item.toggleClass("is-heading", block.headingLevel !== null);
-    const meta = item.createDiv({ cls: "docx-viewer__block-meta" });
+    const meta = item.createDiv({ cls: "word-viewer__block-meta" });
     meta.createSpan({ text: `${block.index}. ${block.type}` });
     if (block.headingLevel !== null) meta.createSpan({ text: `H${block.headingLevel}` });
     if (block.list) meta.createSpan({ text: "list" });
@@ -278,15 +278,15 @@ function renderBlocks(parent: HTMLElement, blocks: DocxBlock[], activeBlockIndex
     if (block.type === "table") {
       renderTable(item, block);
     } else {
-      item.createDiv({ cls: "docx-viewer__paragraph", text: block.text || "(empty paragraph)" });
+      item.createDiv({ cls: "word-viewer__paragraph", text: block.text || "(empty paragraph)" });
     }
     renderHyperlinks(item, block.hyperlinks);
   });
 }
 
 function renderTable(parent: HTMLElement, block: DocxBlock): void {
-  const wrap = parent.createDiv({ cls: "docx-viewer__table-wrap" });
-  const table = wrap.createEl("table", { cls: "docx-viewer__table" });
+  const wrap = parent.createDiv({ cls: "word-viewer__table-wrap" });
+  const table = wrap.createEl("table", { cls: "word-viewer__table" });
   block.rows.forEach((row) => {
     const tr = table.createEl("tr");
     row.forEach((cell) => {
@@ -297,67 +297,67 @@ function renderTable(parent: HTMLElement, block: DocxBlock): void {
 
 function renderHyperlinks(parent: HTMLElement, links: DocxBlock["hyperlinks"]): void {
   if (links.length === 0) return;
-  const list = parent.createDiv({ cls: "docx-viewer__links" });
+  const list = parent.createDiv({ cls: "word-viewer__links" });
   links.forEach((link) => {
-    const pill = list.createSpan({ cls: "docx-viewer__link-pill" });
+    const pill = list.createSpan({ cls: "word-viewer__link-pill" });
     pill.createSpan({ text: link.text });
-    pill.createSpan({ cls: "docx-viewer__link-target", text: link.target });
-    if (link.external) pill.createSpan({ cls: "docx-viewer__link-external", text: "external" });
+    pill.createSpan({ cls: "word-viewer__link-target", text: link.target });
+    if (link.external) pill.createSpan({ cls: "word-viewer__link-external", text: "external" });
   });
 }
 
 function renderComments(parent: HTMLElement, comments: DocxComment[]): void {
-  const section = parent.createDiv({ cls: "docx-viewer__card" });
-  section.createDiv({ cls: "docx-viewer__section-title", text: "Comments" });
+  const section = parent.createDiv({ cls: "word-viewer__card" });
+  section.createDiv({ cls: "word-viewer__section-title", text: "Comments" });
   if (comments.length === 0) {
-    section.createDiv({ cls: "docx-viewer__empty", text: "No comments found." });
+    section.createDiv({ cls: "word-viewer__empty", text: "No comments found." });
     return;
   }
   comments.forEach((comment) => {
-    const item = section.createDiv({ cls: "docx-viewer__annotation" });
-    item.createDiv({ cls: "docx-viewer__annotation-meta", text: `#${comment.id} ${comment.author || "Unknown author"} ${comment.date}`.trim() });
-    item.createDiv({ cls: "docx-viewer__annotation-text", text: comment.text || "(empty comment)" });
+    const item = section.createDiv({ cls: "word-viewer__annotation" });
+    item.createDiv({ cls: "word-viewer__annotation-meta", text: `#${comment.id} ${comment.author || "Unknown author"} ${comment.date}`.trim() });
+    item.createDiv({ cls: "word-viewer__annotation-text", text: comment.text || "(empty comment)" });
   });
 }
 
 function renderNotes(parent: HTMLElement, notes: DocxNote[]): void {
-  const section = parent.createDiv({ cls: "docx-viewer__card" });
-  section.createDiv({ cls: "docx-viewer__section-title", text: "Footnotes and endnotes" });
+  const section = parent.createDiv({ cls: "word-viewer__card" });
+  section.createDiv({ cls: "word-viewer__section-title", text: "Footnotes and endnotes" });
   if (notes.length === 0) {
-    section.createDiv({ cls: "docx-viewer__empty", text: "No footnotes or endnotes found." });
+    section.createDiv({ cls: "word-viewer__empty", text: "No footnotes or endnotes found." });
     return;
   }
   notes.forEach((note) => {
-    const item = section.createDiv({ cls: "docx-viewer__annotation" });
-    item.createDiv({ cls: "docx-viewer__annotation-meta", text: `${note.kind} #${note.id}` });
-    item.createDiv({ cls: "docx-viewer__annotation-text", text: note.text });
+    const item = section.createDiv({ cls: "word-viewer__annotation" });
+    item.createDiv({ cls: "word-viewer__annotation-meta", text: `${note.kind} #${note.id}` });
+    item.createDiv({ cls: "word-viewer__annotation-text", text: note.text });
   });
 }
 
 function renderMedia(parent: HTMLElement, media: DocxMedia[]): void {
-  const section = parent.createDiv({ cls: "docx-viewer__card" });
-  section.createDiv({ cls: "docx-viewer__section-title", text: "Media" });
+  const section = parent.createDiv({ cls: "word-viewer__card" });
+  section.createDiv({ cls: "word-viewer__section-title", text: "Media" });
   if (media.length === 0) {
-    section.createDiv({ cls: "docx-viewer__empty", text: "No embedded media found." });
+    section.createDiv({ cls: "word-viewer__empty", text: "No embedded media found." });
     return;
   }
 
-  const grid = section.createDiv({ cls: "docx-viewer__media-grid" });
+  const grid = section.createDiv({ cls: "word-viewer__media-grid" });
   media.slice(0, MEDIA_RENDER_LIMIT).forEach((item) => {
-    const card = grid.createDiv({ cls: "docx-viewer__media-card" });
-    card.createDiv({ cls: "docx-viewer__media-name", text: item.name });
-    card.createDiv({ cls: "docx-viewer__media-path", text: item.path });
-    card.createDiv({ cls: "docx-viewer__media-meta", text: `${item.contentType} · ${formatBytes(item.size)}` });
+    const card = grid.createDiv({ cls: "word-viewer__media-card" });
+    card.createDiv({ cls: "word-viewer__media-name", text: item.name });
+    card.createDiv({ cls: "word-viewer__media-path", text: item.path });
+    card.createDiv({ cls: "word-viewer__media-meta", text: `${item.contentType} · ${formatBytes(item.size)}` });
   });
   if (media.length > MEDIA_RENDER_LIMIT) {
-    section.createDiv({ cls: "docx-viewer__note", text: `${media.length - MEDIA_RENDER_LIMIT} more media files hidden by render cap.` });
+    section.createDiv({ cls: "word-viewer__note", text: `${media.length - MEDIA_RENDER_LIMIT} more media files hidden by render cap.` });
   }
 }
 
 function renderPackageEntries(parent: HTMLElement, entries: DocxPackageEntry[]): void {
-  const section = parent.createDiv({ cls: "docx-viewer__card" });
-  section.createDiv({ cls: "docx-viewer__section-title", text: "Package diagnostics" });
-  const table = section.createEl("table", { cls: "docx-viewer__package-table" });
+  const section = parent.createDiv({ cls: "word-viewer__card" });
+  section.createDiv({ cls: "word-viewer__section-title", text: "Package diagnostics" });
+  const table = section.createEl("table", { cls: "word-viewer__package-table" });
   const head = table.createEl("thead").createEl("tr");
   head.createEl("th", { text: "Path" });
   head.createEl("th", { text: "Size" });
@@ -367,25 +367,25 @@ function renderPackageEntries(parent: HTMLElement, entries: DocxPackageEntry[]):
     row.createEl("td", { text: entry.directory ? "directory" : formatBytes(entry.size) });
   });
   if (entries.length > PACKAGE_RENDER_LIMIT) {
-    section.createDiv({ cls: "docx-viewer__note", text: `${entries.length - PACKAGE_RENDER_LIMIT} package entries hidden by render cap.` });
+    section.createDiv({ cls: "word-viewer__note", text: `${entries.length - PACKAGE_RENDER_LIMIT} package entries hidden by render cap.` });
   }
 }
 
 function renderWarnings(parent: HTMLElement, warnings: string[], title: string): void {
   if (warnings.length === 0) return;
-  const box = parent.createDiv({ cls: "docx-viewer__warnings" });
-  box.createDiv({ cls: "docx-viewer__warnings-title", text: title });
+  const box = parent.createDiv({ cls: "word-viewer__warnings" });
+  box.createDiv({ cls: "word-viewer__warnings-title", text: title });
   const list = box.createEl("ul");
   warnings.forEach((warning) => list.createEl("li", { text: warning }));
 }
 
 function renderMessage(parent: HTMLElement, message: string): void {
-  parent.createDiv({ cls: "docx-viewer__message", text: message });
+  parent.createDiv({ cls: "word-viewer__message", text: message });
 }
 
 function createIconButton(parent: HTMLElement, icon: string, label: string): HTMLButtonElement {
   const button = parent.createEl("button", {
-    cls: "docx-viewer__icon-button",
+    cls: "word-viewer__icon-button",
     attr: {
       "aria-label": label,
       title: label,

@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
-  <title id="title">DOCX Viewer repository hero</title>
+  <title id="title">Word Viewer repository hero</title>
   <desc id="desc">A read-only document viewer with outline, document blocks, comments, media, and package diagnostics.</desc>
   <rect width="1280" height="640" fill="#15171b"/>
   <rect x="48" y="78" width="1184" height="500" rx="26" fill="#20242a" stroke="#3c444f" stroke-width="2"/>
-  <text x="96" y="50" fill="#eef2f7" font-family="Arial" font-size="34" font-weight="700">DOCX Viewer</text>
+  <text x="96" y="50" fill="#eef2f7" font-family="Arial" font-size="34" font-weight="700">Word Viewer</text>
   <text x="96" y="614" fill="#9aa6b5" font-family="Arial" font-size="20">Read-only text, structure, media, and package diagnostics</text>
   <rect x="88" y="118" width="290" height="398" rx="16" fill="#28303a"/>
   <rect x="430" y="118" width="360" height="398" rx="16" fill="#f8fafc"/>

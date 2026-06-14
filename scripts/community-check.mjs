@@ -4,6 +4,9 @@ const manifest = JSON.parse(fs.readFileSync("manifest.json", "utf8"));
 const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
 const versions = JSON.parse(fs.readFileSync("versions.json", "utf8"));
 
+const allowedManifestNamePattern = /^[A-Za-z0-9 ()+-]+$/;
+const lowerName = manifest.name.toLowerCase();
+
 const checks = [
   [fs.existsSync("README.md"), "README.md exists at repository root"],
   [fs.existsSync("LICENSE"), "LICENSE exists at repository root"],
@@ -20,8 +23,10 @@ const checks = [
   [/^[a-z-]+$/.test(manifest.id), "manifest id contains only lowercase letters and hyphens"],
   [!manifest.id.includes("obsidian"), "manifest id does not contain obsidian"],
   [!manifest.id.endsWith("plugin"), "manifest id does not end with plugin"],
-  [manifest.id === "docx-viewer", "manifest id is docx-viewer"],
-  [manifest.name === "DOCX Viewer", "manifest name is DOCX Viewer"],
+  [manifest.id === "word-viewer", "manifest id is word-viewer"],
+  [manifest.name === "Word Viewer", "manifest name is Word Viewer"],
+  [allowedManifestNamePattern.test(manifest.name), "manifest name uses only Basic Latin letters/numbers/spaces and allowed punctuation: hyphen, plus, parentheses"],
+  [!lowerName.includes("obsidian") && !lowerName.includes("obsi-") && !lowerName.includes("-sidian"), "manifest name avoids Obsidian and Obsidian-like variations"],
   [typeof manifest.description === "string" && manifest.description.length > 0, "manifest description is present"],
   [typeof manifest.author === "string" && manifest.author.length > 0, "manifest author is present"],
   [typeof manifest.minAppVersion === "string" && manifest.minAppVersion.length > 0, "manifest minAppVersion is present"],

@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">DOCX Viewer social preview</title>
-  <desc id="desc">A clean social preview for the DOCX Viewer plugin.</desc>
+  <title id="title">Word Viewer social preview</title>
+  <desc id="desc">A clean social preview for the Word Viewer plugin.</desc>
   <rect width="1200" height="630" fill="#161a20"/>
   <rect x="70" y="76" width="1060" height="478" rx="28" fill="#222832" stroke="#3b4554" stroke-width="2"/>
-  <text x="114" y="158" fill="#f8fafc" font-family="Arial" font-size="56" font-weight="800">DOCX Viewer</text>
+  <text x="114" y="158" fill="#f8fafc" font-family="Arial" font-size="56" font-weight="800">Word Viewer</text>
   <text x="116" y="214" fill="#b7c2d3" font-family="Arial" font-size="26">Read-only document structure, media, and diagnostics</text>
   <rect x="124" y="284" width="248" height="168" rx="16" fill="#364152"/>
   <rect x="416" y="284" width="248" height="168" rx="16" fill="#f8fafc"/>

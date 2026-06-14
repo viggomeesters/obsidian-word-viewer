@@ -23,9 +23,9 @@ const forbidden = [
 ];
 
 const assertions = [
-  [manifest.id === "docx-viewer", "manifest id is docx-viewer"],
-  [manifest.name === "DOCX Viewer", "manifest name is DOCX Viewer"],
-  [manifest.version === "0.1.0", "manifest version is 0.1.0"],
+  [manifest.id === "word-viewer", "manifest id is word-viewer"],
+  [manifest.name === "Word Viewer", "manifest name is Word Viewer"],
+  [manifest.version === "0.1.1", "manifest version is 0.1.1"],
   [versions[manifest.version] === manifest.minAppVersion, "versions.json maps manifest version"],
   [!/obsidian/i.test(manifest.description), "manifest description avoids product name"],
   [/^[a-z-]+$/.test(manifest.id) && !manifest.id.includes("obsidian") && !manifest.id.endsWith("plugin"), "manifest id follows directory rules"],
@@ -57,4 +57,4 @@ if (failures.length > 0) {
   throw new Error(`Smoke checks failed: ${failures.join("; ")}`);
 }
 
-console.log("DOCX Viewer smoke checks passed.");
+console.log("Word Viewer smoke checks passed.");

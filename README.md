@@ -1,8 +1,8 @@
-# DOCX Viewer
+# Word Viewer
 
-![DOCX Viewer repo hero](assets/hero.svg)
+![Word Viewer repo hero](assets/hero.svg)
 
-DOCX Viewer opens `.docx` files as a read-only inspection view inside the app. It focuses on document text, headings, tables, comments, footnotes, endnotes, media metadata, relationships, warnings, and package diagnostics.
+Word Viewer opens `.docx` files as a read-only inspection view inside the app. It focuses on document text, headings, tables, comments, footnotes, endnotes, media metadata, relationships, warnings, and package diagnostics.
 
 ## Features
 
@@ -13,7 +13,7 @@ DOCX Viewer opens `.docx` files as a read-only inspection view inside the app. I
 - Warns about external relationships, embedded OLE/package content, macro-related package content, tracked changes, large documents, encrypted files, and malformed packages.
 - Caps large render lists so big documents stay responsive.
 
-![DOCX Viewer preview](assets/screenshot.svg)
+![Word Viewer preview](assets/screenshot.svg)
 
 ## Non-goals
 
@@ -29,12 +29,12 @@ DOCX Viewer opens `.docx` files as a read-only inspection view inside the app. I
 ## Install from release
 
 1. Download `main.js`, `manifest.json`, and `styles.css` from the matching GitHub release.
-2. Place them in `.obsidian/plugins/docx-viewer/`.
-3. Enable `DOCX Viewer` in Community plugins.
+2. Place them in `.obsidian/plugins/word-viewer/`.
+3. Enable `Word Viewer` in Community plugins.
 
 ## Security and privacy
 
-DOCX Viewer treats documents as untrusted local packages. It reads files through the vault API, renders local metadata and text, and does not send vault content to external services.
+Word Viewer treats documents as untrusted local packages. It reads files through the vault API, renders local metadata and text, and does not send vault content to external services.
 
 The plugin does not use network APIs, clipboard APIs, shell calls, external app launches, macro execution, embedded object execution, or file write-back APIs.
 
@@ -60,9 +60,9 @@ For each release:
 
 ## Community review checklist
 
-- Plugin id is `docx-viewer`.
+- Plugin id is `word-viewer`.
 - `manifest.json` version matches `versions.json`.
-- Release tag is exactly `0.1.0`, not `v0.1.0`.
+- Release tag is exactly `0.1.1`, not `v0.1.1`.
 - Release includes `main.js`, `manifest.json`, and `styles.css`.
 - Runtime code does not use network, clipboard, shell, eval, write-back, or external app launch APIs.
 - Manifest description avoids restricted product-name wording.

@@ -5,7 +5,7 @@ const production = process.env.NODE_ENV === "production";
 
 await esbuild.build({
   banner: {
-    js: "/* DOCX Viewer generated bundle */",
+    js: "/* Word Viewer generated bundle */",
   },
   bundle: true,
   entryPoints: ["src/main.ts"],

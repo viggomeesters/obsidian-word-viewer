@@ -1,17 +1,17 @@
 {
-  "name": "obsidian-docx-viewer",
-  "version": "0.1.0",
+  "name": "obsidian-word-viewer",
+  "version": "0.1.1",
   "description": "Read-only DOCX document inspection view.",
   "license": "MIT",
   "author": "Viggo Meesters",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/viggomeesters/obsidian-docx-viewer.git"
+    "url": "git+https://github.com/viggomeesters/obsidian-word-viewer.git"
   },
   "bugs": {
-    "url": "https://github.com/viggomeesters/obsidian-docx-viewer/issues"
+    "url": "https://github.com/viggomeesters/obsidian-word-viewer/issues"
   },
-  "homepage": "https://github.com/viggomeesters/obsidian-docx-viewer#readme",
+  "homepage": "https://github.com/viggomeesters/obsidian-word-viewer#readme",
   "type": "module",
   "scripts": {
     "build": "NODE_ENV=production node esbuild.config.mjs",

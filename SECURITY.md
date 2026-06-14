@@ -1,6 +1,6 @@
 # Security
 
-DOCX Viewer treats Word documents as untrusted local packages.
+Word Viewer treats Word documents as untrusted local packages.
 
 - It does not execute macros, VBA, OLE objects, embedded packages, scripts, or external relationships.
 - It does not upload files or make network requests.
