@@ -1,6 +1,8 @@
 import fs from "node:fs";
 
 const manifest = JSON.parse(fs.readFileSync("manifest.json", "utf8"));
+const releasePackage = JSON.parse(fs.readFileSync("package.json", "utf8"));
+const releaseVersions = JSON.parse(fs.readFileSync("versions.json", "utf8"));
 const versions = JSON.parse(fs.readFileSync("versions.json", "utf8"));
 const main = fs.readFileSync("src/main.ts", "utf8");
 const parser = fs.readFileSync("src/parser.ts", "utf8");
@@ -25,7 +27,7 @@ const forbidden = [
 const assertions = [
   [manifest.id === "word-viewer", "manifest id is word-viewer"],
   [manifest.name === "Word Viewer", "manifest name is Word Viewer"],
-  [manifest.version === "0.1.1", "manifest version is 0.1.1"],
+  [manifest.version === releasePackage.version && /^\d+\.\d+\.\d+$/.test(manifest.version) && releaseVersions[manifest.version] === manifest.minAppVersion, "release version matches package and supported app version"],
   [versions[manifest.version] === manifest.minAppVersion, "versions.json maps manifest version"],
   [!/obsidian/i.test(manifest.description), "manifest description avoids product name"],
   [/^[a-z-]+$/.test(manifest.id) && !manifest.id.includes("obsidian") && !manifest.id.endsWith("plugin"), "manifest id follows directory rules"],
