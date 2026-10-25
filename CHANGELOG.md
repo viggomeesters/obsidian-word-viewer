@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 - 2026-10-25
+
+- Cross-platform production build.
+
+
 ## 0.1.1
 
 - Renamed the plugin id and repository metadata from `docx-viewer` / `obsidian-docx-viewer` to `word-viewer` / `obsidian-word-viewer` because the Community directory already has a `docx-viewer` plugin.
