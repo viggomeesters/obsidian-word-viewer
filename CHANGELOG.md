@@ -3,7 +3,8 @@
 ## 0.1.3 - 2026-11-16
 
 - Maintenance verification for Obsidian 1.15.1 on macOS desktop.
-- Add reproducible official Obsidian lint checks; no runtime code change.
+- Let outline buttons grow with their title and metadata to prevent overlapping rows.
+- Add reproducible official Obsidian lint checks.
 
 ## 0.1.2 - 2026-10-25
 

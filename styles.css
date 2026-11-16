@@ -162,6 +162,7 @@
   display: grid;
   gap: 8px;
   grid-template-columns: 32px minmax(0, 1fr);
+  height: auto;
   margin-bottom: 4px;
   padding: 8px;
   text-align: left;
