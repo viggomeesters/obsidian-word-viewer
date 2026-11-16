@@ -1,11 +1,17 @@
-# Obsidian 1.15.1 assessment — 16 November 2026
+# Obsidian 1.15.1 verification — 16 November 2026
 
-Source assessed: `19b24a2420678417230671e921adb25a0fcbb2b2`, plugin 0.1.2.
+Maintenance patch `0.1.3` repairs outline button height and narrow header/summary overlap. Actual Obsidian 1.15.1 exercised final CSS candidate `18ced6968df79672b1f1656728cd19fdccf36b2f` with exact source, bundle, manifest and CSS hashes. Production main.js SHA-256: `47cc67d9d3dd4da7581ee73f2ad886559191db1f16a95825cb1c3dd633e43603`.
 
-[Obsidian desktop 1.15.1](https://obsidian.md/changelog/2026-11-12-desktop-v1.15.1/) changes startup, indexing, hidden-window timers, plugin installation settings and external opening of unrecognized attachments. A targeted source search found no `activeWindow`, Array/String `contains`, `trashFile`, `promptForDeletion`, PIXI or Mermaid use requiring a change. DOM element `contains` is a different API. This bounded search does not establish runtime compatibility.
+The earlier actual-host fixture run checked fixture-specific rendered values for `fixtures/word-viewer/simple.docx` and opened five further DOCX fixtures as smoke checks for nonempty output and no plugin-load failure. Every input hash was unchanged; primary values, extension/command unregistration and reload passed. Those other fixtures did not receive separate semantic malformed/encrypted/embedded-object oracles. Final CSS changes preserve the tested TypeScript, production bundle and manifest.
 
-Local checks passed in a fresh macOS checkout using the existing lockfile and `npm ci --ignore-scripts`. Executed repository scripts: `npm run build`, `npm run test`, `npm run typecheck`. Scripts absent from package.json were skipped, not counted as successful tests. Production `main.js` SHA-256: `47cc67d9d3dd4da7581ee73f2ad886559191db1f16a95825cb1c3dd633e43603`. Parser fixtures, test doubles and headless host tests only prove their own tested behavior.
+The outline height repair was checked with a native-height negative control that reproduced metadata overflow, then with automatic height containing all metadata and separating all three controls. Outline click/rerender and reload passed. A later independent image review found header/statistics overlap at an emulated 700px application viewport; that evidence was retained and the header shrink repaired before publication.
 
-Actual Obsidian 1.15.1 startup, view/file opening, lifecycle and relevant settings remain unverified. No established non-disruptive background connection to a 1.15.1 host was available; the running app and the designated test vault's settings/fixtures were left untouched. No mobile or minimum-version runtime claim follows from these checks. Keep the maintenance issue open for the real-host gate. No release or version bump was made.
+Final tests at emulated application viewports of 700×1050 and 1800×1050 assert header/summary/warnings separation, toolbar containment within header in both axes, filter containment and positive filter/reload widths, and no filter/reload overlap. Restoring old flex-shrink reproduced the narrow header overlap. Outline metadata containment, selection of the second outline control, reload and unchanged original DOCX bytes passed with the final CSS.
 
-Locked-tree npm audit snapshot: `{"info":0,"low":0,"moderate":2,"high":0,"critical":0,"total":2}`. These are whole dependency-tree package counts, not demonstrated runtime exposure; test-only dependencies are included. No broad dependency upgrade or force-fix was applied. Remaining advisories require separate dependency triage.
+Tests use fictional fixtures in an own synthetic vault on macOS arm64, actual Obsidian 1.15.1 and Electron 39.8.3. A bounded bootstrap separates the test profile and CLI socket. Mock keychain is enabled; ordinary CLI owner, socket inode and version response and original application bytes remained intact before/during/after. Own host and children were confirmed stopped. Windows may be visible and remain unfocused; no OS mouse/keyboard or native resize/throttle commands are used.
+
+Locked install, TypeScript, production build, existing tests, official Obsidian lint and production audit passed. Generated test artifacts are outside the official production-source lint scope. This establishes the exercised macOS behavior, not native resizing, pane/container layouts, mobile, minimum-version, authentication or real keychain behavior. Official source/release scans, asset readback and fresh Community installation remain separate publication gates.
+
+![700px emulated application viewport](../assets/obsidian-1.15.1-700.png)
+
+![1800px emulated application viewport](../assets/obsidian-1.15.1-1800.png)
